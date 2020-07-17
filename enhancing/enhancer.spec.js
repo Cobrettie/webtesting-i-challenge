@@ -79,7 +79,31 @@ describe('enhancer functions', () => {
       result = enhancer.fail(testItem)
       expect(result.enhancement).toBe(expected)
     })
+
+    describe('get', () => {
+      it('if enhancement = 0, no name change', () => {
+        let testItem = {
+          name: 'test item 92',
+          enhancement: 0,
+          durability: 42
+        }
+          let result;
+          let expected = testItem.name 
+          result = enhancer.get(testItem)
+          expect(result.name).toBe(expected)
+      })
+
+      it('if enhancement > 0, name = `[+ enhancement lvl] item.name` ', () => {
+        let testItem = {
+          name: 'fire blaze og sword op',
+          enhancement: 19,
+          durability: 98
+        }
+        let result;
+        let expected = `[+${testItem.enhancement}] ${testItem.name}`
+        result = enhancer.get(testItem)
+        expect(result.name).toBe(expected)
+      })
+    })
   })
-
-
 })
